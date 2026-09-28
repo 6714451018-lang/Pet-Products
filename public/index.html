@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ร้านขายอาหารสัตว์ HAPPY PAWS</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- ============================================================
+       TODO 1 • NAVBAR
+       ------------------------------------------------------------
+       HTML ของ navbar เตรียมไว้ให้แล้ว — ไปเขียน CSS ที่ style.css
+       เป้าหมาย: Logo ชิดซ้าย, Menu 3 รายการชิดขวา, กึ่งกลางแนวตั้ง
+       ============================================================ -->
+  <nav class="navbar">
+    <div class="logo">HAPPY PAWS</div>
+    <ul class="menu">
+      <li><a href="#hero">หน้าหลัก</a></li>
+      <li><a href="#products">สินค้า</a></li>
+      <li><a href="#contact">ติดต่อ</a></li>
+    </ul>
+  </nav>
+
+
+  <!-- ============================================================
+       TODO 2 • HERO SECTION
+       ------------------------------------------------------------
+       เป้าหมาย: รูปฝั่งซ้าย + ข้อความฝั่งขวา เคียงข้างกัน
+       ============================================================ -->
+  <section class="hero" id="hero">
+    <img src="assets/Store.jpg" alt="ภาพหลักของธุรกิจ" class="hero-img">
+    <div class="hero-text">
+      <h1>ถูก ปลอดภัย กินแล้ววิ่งไล่ไก่ทั้งวัน</h1>
+      <p>อาหารสัตว์คุณภาพ พร้อมบริการแบบคนรักสัตว์ตัวจริง เลือกเราเพราะเราเข้าใจทั้งเจ้าของและน้องๆ</p>
+      <a href="#products" class="btn">ดูสินค้าของเรา</a>
+    </div>
+  </section>
+
+  <section class="add-form-section">
+    <h2 class="section-title">➕ เพิ่มผลิตภัณฑ์ใหม่</h2>
+
+    <form id="add-product-form" class="add-form" enctype="multipart/form-data">
+
+      <div class="form-group">
+        <label for="product-name">ชื่อผลิตภัณฑ์ *</label>
+        <input type="text" id="product-name" name="name" required placeholder="เช่น น้ำพริกเผา">
+      </div>
+
+      <div class="form-group">
+        <label for="product-producer">ผู้ผลิต/กลุ่ม *</label>
+        <input type="text" id="product-producer" name="producer" required placeholder="เช่น กลุ่มแม่บ้านบ้านโคก">
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="product-price">ราคา (บาท) *</label>
+          <input type="number" id="product-price" name="price" required min="1" placeholder="60">
+        </div>
+
+        <div class="form-group">
+          <label for="product-category">หมวดหมู่ *</label>
+          <select id="product-category" name="category" required>
+            <option value="">-- เลือกหมวดหมู่ --</option>
+            <option value="อาหาร/เครื่องดื่ม">🍯 อาหาร/เครื่องดื่ม</option>
+            <option value="ผ้า/เครื่องแต่งกาย">👗 ผ้า/เครื่องแต่งกาย</option>
+            <option value="เครื่องประดับ/หัตถกรรม">💍 เครื่องประดับ/หัตถกรรม</option>
+            <option value="สมุนไพร/สุขภาพ">🌿 สมุนไพร/สุขภาพ</option>
+            <option value="ของใช้/ของตกแต่ง">🏺 ของใช้/ของตกแต่ง</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="product-contact">เบอร์ติดต่อ (ถ้ามี)</label>
+        <input type="tel" id="product-contact" name="contact" placeholder="081-234-5678">
+      </div>
+
+      <div class="form-group">
+        <label for="product-image">รูปภาพ (jpg,png, webp - ไม่เกิน 5 MB)</label>
+        <input type="file" id="product-image" name="image" accept="image/jpeg,image/png,image/webp">
+      </div>
+
+      <button type="submit" class="submit-btn">
+        ➕ เพิ่มผลิตภัณฑ์
+      </button>
+    </form>
+  </section>
+  <!-- ============================================================
+       TODO 3 • CARD GRID (สินค้า/บริการ)
+       ------------------------------------------------------------
+       เป้าหมาย: 4 cards เรียงในแถวบน desktop, ตัดบรรทัด (wrap) บนจอเล็ก
+       ============================================================ -->
+  <section class="cards-section" id="products">
+    <h2 class="section-title">สินค้าและบริการของเรา</h2>
+
+    <div class="card-grid" id="products-container">
+
+    </div>
+  </section>
+
+  <!-- Edit Modal -->
+  <div id="edit-modal" class="modal-overlay hidden">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>✏️ แก้ไขผลิตภัณฑ์</h2>
+        <button class="modal-close" id="modal-close">✕</button>
+      </div>
+
+      <form id="edit-form" class="edit-form">
+        <input type="hidden" id="edit-id">
+
+        <div class="form-group">
+          <label>ชื่อผลิตภัณฑ์ *</label>
+          <input type="text" id="edit-name" required>
+        </div>
+
+        <div class="form-group">
+          <label>ผู้ผลิต/กลุ่ม *</label>
+          <input type="text" id="edit-producer" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>ราคา *</label>
+            <input type="number" id="edit-price" required min="1">
+          </div>
+
+          <div class="form-group">
+            <label>หมวดหมู่ *</label>
+            <select id="edit-category" required>
+              <option value="อาหาร/เครื่องดื่ม">🍯 อาหาร/เครื่องดื่ม</option>
+              <option value="ผ้า/เครื่องแต่งกาย">👗 ผ้า/เครื่องแต่งกาย</option>
+              <option value="เครื่องประดับ/หัตถกรรม">💍 เครื่องประดับ/หัตถกรรม</option>
+              <option value="สมุนไพร/สุขภาพ">🌿 สมุนไพร/สุขภาพ</option>
+              <option value="ของใช้/ของตกแต่ง">🏺 ของใช้/ของตกแต่ง</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>เบอร์ติดต่อ</label>
+          <input type="tel" id="edit-contact">
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="cancel-btn" id="cancel-btn">ยกเลิก</button>
+          <button type="submit" class="submit-btn">💾 บันทึก</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+
+
+  <!-- ============================================================
+       TODO 4 • FOOTER
+       ------------------------------------------------------------
+       เป้าหมาย: 3 คอลัมน์ (ติดต่อ / โซเชียล / เกี่ยวกับเรา) กระจายเท่า ๆ กัน
+       ============================================================ -->
+  <footer class="footer" id="contact">
+    <div class="footer-inner">
+
+      <div class="footer-col">
+        <h4>ติดต่อเรา</h4>
+        <p>โทร 0X-XXXX-XXXX</p>
+        <p>อีเมล contact@business.com</p>
+        <p>ที่อยู่ จังหวัดจันทบุรี</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>โซเชียลมีเดีย</h4>
+        <p><a href="#">Facebook</a></p>
+        <p><a href="#">Instagram</a></p>
+        <p><a href="#">LINE Official</a></p>
+      </div>
+
+      <div class="footer-col">
+        <h4>เกี่ยวกับเรา</h4>
+        <p>ร้านของเราเริ่มต้นจากความตั้งใจที่อยากให้สัตว์เลี้ยงทุกตัวได้รับโภชนาการที่ดีและเหมาะสม
+          เราจึงคัดสรรอาหารและขนมสัตว์เลี้ยงที่มีคุณภาพ สะอาด และปลอดภัยจากแบรนด์ชั้นนำมารวมไว้ในที่เดียว
+          เพื่อช่วยดูแลสุขภาพของสัตว์เลี้ยงที่คุณรักให้แข็งแรงสมบูรณ์ และพร้อมเติบโตไปพร้อมกับคุณในทุกช่วงวัย</p>
+      </div>
+
+    </div>
+
+    <p class="copyright">© 2569 HAPPY PAWS — สงวนลิขสิทธิ์</p>
+  </footer>
+
+</body>
+
+</html>
+
+<!--6714451018 นายมงคล เชียงชุม
+  6714451043 นายวริศ สุกใส-->
